@@ -46,7 +46,16 @@ builder.Services.AddScoped<IValidator<AddVocabularyRequest>, AddVocabularyValida
 
 builder.Services.AddFluentValidationAutoValidation();
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyCorsPolicy", builder =>
+    {
+        builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -60,5 +69,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseCors("MyCorsPolicy");
 app.Run();

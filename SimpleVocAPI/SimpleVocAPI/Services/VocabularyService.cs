@@ -18,12 +18,12 @@ namespace SimpleVocAPI.Services
             this.mapper = mapper;
         }
 
-        public async Task<AddVocublaryResponse> Add(AddVocabularyRequest addVocabularyRequest)
+        public async Task<AddVocabularyResponse> Add(AddVocabularyRequest addVocabularyRequest)
         {
             var vocEntity = mapper.Map<Vocabulary>(addVocabularyRequest);
             var vocEntityAdded = await vocabularyRepository.AddAsync(vocEntity);
             await unitOfWork.SaveChangesAsync();
-            return mapper.Map<AddVocublaryResponse>(vocEntityAdded);
+            return mapper.Map<AddVocabularyResponse>(vocEntityAdded);
         }
 
         public async Task<IEnumerable<GetVocabularyResponse>> GetAll()

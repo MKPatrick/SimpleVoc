@@ -1,0 +1,76 @@
+﻿@inject IVocabularyService vocabularyService;
+@inject NavigationManager navigationManager;
+@page "/"
+
+<h1>Overview about all Vocabularies</h1>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+
+			<th>
+				Text
+			</th>
+			<th>
+				Translation
+			</th>
+			<th>
+				Tooling
+			</th>
+		</tr>
+	</thead>
+	@foreach (var voc in vocabularies)
+	{
+		<tr>
+			<td>
+				@voc.ID
+			</td>
+			<td>
+				@voc.Original
+			</td>
+			<td>
+				@voc.Translation
+			</td>
+			<td>
+				<span @onclick="()=>DeleteVoc(voc)">🗑️</span>
+
+				<span @onclick="()=>EditVoc(voc.ID)">🖊️</span>
+			</td>
+		</tr>
+	}
+
+</table>
+
+@code {
+
+	List<Vocabulary> vocabularies = new List<Vocabulary>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		vocabularies = await vocabularyService.GetVocabularies();
+	}
+
+	void EditVoc(int id)
+	{
+		navigationManager.NavigateTo($"/UpdateVocabulary/{id}");
+	}
+
+	async Task DeleteVoc(Vocabulary voc)
+	{
+		try
+		{
+			await vocabularyService.DeleteVocabularyByID(voc.ID);
+			vocabularies.Remove(voc);
+		}
+		catch (Exception ex)
+		{
+
+
+		}
+
+	}
+}

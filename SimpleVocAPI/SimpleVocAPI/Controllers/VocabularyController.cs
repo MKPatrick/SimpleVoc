@@ -11,10 +11,12 @@ namespace SimpleVocAPI.Controllers
     public class VocabularyController : ControllerBase
     {
         private readonly IVocabularyService vocabularyService;
+        private readonly ILogger<VocabularyController> logger;
 
-        public VocabularyController(IVocabularyService vocabularyService)
+        public VocabularyController(IVocabularyService vocabularyService,ILogger<VocabularyController> logger)
         {
             this.vocabularyService = vocabularyService;
+            this.logger = logger;
         }
 
         // GET: api/<VocabularyController>
@@ -28,7 +30,7 @@ namespace SimpleVocAPI.Controllers
             }
             catch (Exception ex)
             {
-                //todo: Logger
+                logger.LogError(ex.ToString());
                 return StatusCode(500);
             }
 
@@ -45,7 +47,7 @@ namespace SimpleVocAPI.Controllers
             }
             catch (Exception ex)
             {
-                //todo: Logger
+                logger.LogError(ex.ToString());
                 return StatusCode(500);
             }
         }
@@ -61,7 +63,7 @@ namespace SimpleVocAPI.Controllers
             }
             catch (Exception ex)
             {
-                //todo: Logger
+                logger.LogError(ex.ToString());
                 return StatusCode(500);
             }
         }
@@ -77,7 +79,7 @@ namespace SimpleVocAPI.Controllers
             }
             catch (Exception ex)
             {
-                //todo: Logger
+                logger.LogError(ex.ToString());
                 return StatusCode(500);
             }
         }
@@ -93,7 +95,7 @@ namespace SimpleVocAPI.Controllers
             }
             catch (Exception ex)
             {
-                //todo: Logger
+                logger.LogError(ex.ToString());
                 return StatusCode(500);
             }
         }

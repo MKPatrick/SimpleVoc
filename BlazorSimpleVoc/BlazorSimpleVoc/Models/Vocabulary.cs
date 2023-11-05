@@ -1,6 +1,6 @@
-﻿namespace SimpleVocAPI.DTO.Vocabulary
+﻿namespace BlazorSimpleVoc.Models
 {
-    public class AddVocublaryResponse
+    public class Vocabulary
     {
         public int ID { get; set; }
         public string Original { get; set; }

@@ -8,7 +8,7 @@ namespace SimpleVocAPI.Mapping
     {
         public VocabularyMapping()
         {
-            CreateMap<Vocabulary, AddVocublaryResponse>();
+            CreateMap<Vocabulary, AddVocabularyResponse>();
             CreateMap<AddVocabularyRequest, Vocabulary>();
 
             CreateMap<Vocabulary, GetVocabularyResponse>();

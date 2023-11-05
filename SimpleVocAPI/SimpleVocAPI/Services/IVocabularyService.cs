@@ -4,7 +4,7 @@ namespace SimpleVocAPI.Services
 {
     public interface IVocabularyService
     {
-        Task<AddVocublaryResponse> Add(AddVocabularyRequest addVocabularyRequest);
+        Task<AddVocabularyResponse> Add(AddVocabularyRequest addVocabularyRequest);
         Task Delete(int VocabularyID);
         Task<IEnumerable<GetVocabularyResponse>> GetAll();
         Task<GetVocabularyResponse> GetByID(int ID);

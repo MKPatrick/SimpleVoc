@@ -1,0 +1,43 @@
+﻿@page "/AddVocabulary"
+@inject NavigationManager navigationmanager;
+@inject IVocabularyService vocabularyService;
+<h3>AddVocabulary</h3>
+<EditForm Model="@model" OnValidSubmit="AddVocabularyOnValidSubmit">
+	<div class="form-group">
+		<label for="originalText">Original Text</label>
+		<input @bind-value=model.Original class="form-control" id="originalText" placeholder="Enter the origianal text">
+	</div>
+	<div class="form-group">
+		<label for="translatedText">Translated Text</label>
+		<input   @bind-value=model.Translation class="form-control" id="translatedText" placeholder="Enter the translated Text" />
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+@if (!string.IsNullOrEmpty(ErrorText))
+{
+	<p>@ErrorText</p>
+}
+
+
+@code {
+
+	private Vocabulary model = new Vocabulary();
+
+	private string ErrorText = string.Empty;
+	public async Task AddVocabularyOnValidSubmit()
+	{
+		try
+		{
+			if (await vocabularyService.AddVocabulary(model) != null)
+			{
+				navigationmanager.NavigateTo("/");
+			}
+		}
+		catch (Exception ex)
+		{
+
+			ErrorText = ex.ToString();
+		}
+	}
+
+}
